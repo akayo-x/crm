@@ -5,7 +5,7 @@ export default {
     async fetchCategories({commit, dispatch}) {
       try {
         const uid = await dispatch('getUid')
-        const categories = (await firebase.database().ref(`/users/${uid}/categories`).once('value')).val() || {}
+        const categories = (await firebase.database().ref(`/users/${uid}/teachers`).once('value')).val() || {}
         return Object.keys(categories).map(key => ({...categories[key], id: key}))
       } catch (e) {
         commit('setError', e)
@@ -15,27 +15,27 @@ export default {
     async fetchCategoryById({commit, dispatch}, id) {
       try {
         const uid = await dispatch('getUid')
-        const category = (await firebase.database().ref(`/users/${uid}/categories`).child(id).once('value')).val() || {}
+        const category = (await firebase.database().ref(`/users/${uid}/teachers`).child(id).once('value')).val() || {}
         return {...category, id}
       } catch (e) {
         commit('setError', e)
         throw e
       }
     },
-    async updateCategory({commit, dispatch}, {title, limit, id}) {
+    async updateCategory({commit, dispatch}, {name,last_name}) {
       try {
         const uid = await dispatch('getUid')
-        await firebase.database().ref(`/users/${uid}/categories`).child(id).update({title, limit})
+        await firebase.database().ref(`/users/${uid}/teachers`).child(id).update({name, last_name})
       } catch (e) {
         commit('setError', e)
         throw e
       }
     },
-    async createCategory({commit, dispatch}, {title, limit}) {
+    async createCategory({commit, dispatch}, {name, last_name}) {
       try {
         const uid = await dispatch('getUid')
-        const category = await firebase.database().ref(`/users/${uid}/categories`).push({title, limit})
-        return {title, limit, id: category.key}
+        const category = await firebase.database().ref(`/users/${uid}/teachers`).push({name, last_name})
+        return {name, last_name, id: category.key}
       } catch (e) {
         commit('setError', e)
         throw e

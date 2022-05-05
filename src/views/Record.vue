@@ -14,7 +14,7 @@
     <form class="form" v-else @submit.prevent="handleSubmit">
       <div class="input-field">
         <select ref="select" v-model="category">
-          <option v-for="c in categories" :key="c.id" :value="c.id">{{c.title}}</option>
+          <option v-for="c in categories" :key="c.id" :value="c.id">{{c.last_name + c.name}}</option>
         </select>
         <label>{{'SelectCategory'|localize}}</label>
       </div>

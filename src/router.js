@@ -45,12 +45,6 @@ const router = new Router({
       component: () => import('./views/History.vue')
     },
     {
-      path: '/planning',
-      name: 'planning',
-      meta: {layout: 'main', auth: true},
-      component: () => import('./views/Planning.vue')
-    },
-    {
       path: '/profile',
       name: 'profile',
       meta: {layout: 'main', auth: true},

@@ -1,7 +1,7 @@
 <template>
   <div class="col s12 m6">
     <div>
-      <div class="page-subtitle">
+      <div class="page-subname">
         <h4>{{'Create'|localize}}</h4>
       </div>
 
@@ -10,29 +10,31 @@
           <input
             id="name"
             type="text"
-            v-model="title"
-            :class="{invalid: $v.title.$dirty && !$v.title.required}"
+            v-model="name"
+            :class="{invalid: $v.name.$dirty && !$v.name.required}"
           >
-          <label for="name">{{'Title'|localize}}</label>
+          <label for="name">{{'name'|localize}}</label>
           <span
-            v-if="$v.title.$dirty && !$v.title.required"
+            v-if="$v.name.$dirty && !$v.name.required"
             class="helper-text invalid"
-          >{{'Message_CategoryTitle'|localize}}</span>
+          >{{'Message_Categoryname'|localize}}</span>
         </div>
 
         <div class="input-field">
           <input
-            id="limit"
-            type="number"
-            v-model.number="limit"
-            :class="{invalid: $v.limit.$dirty && !$v.limit.minValue}"
+            id="last_name"
+            type="text"
+            v-model="last_name"
+            :class="{invalid: $v.last_name.$dirty && !$v.last_name.required}"
           >
-          <label for="limit">{{'Limit'|localize}}</label>
+          <label for="name">{{'last_name'|localize}}</label>
           <span
-            v-if="$v.limit.$dirty && !$v.limit.minValue"
+            v-if="$v.last_name.$dirty && !$v.last_name.required"
             class="helper-text invalid"
-          >{{'Message_MinLength'|localize}} {{$v.limit.$params.minValue.min}}</span>
+          >{{'Message_Categoryname'|localize}}</span>
         </div>
+
+
 
         <button class="btn waves-effect waves-light" type="submit">
           {{'Create'|localize}}
@@ -48,12 +50,12 @@ import { required, minValue } from 'vuelidate/lib/validators'
 import localizeFilter from '@/filters/localize.filter'
 export default {
   data: () => ({
-    title: '',
-    limit: 100
+    name: '',
+    last_name: ''
   }),
   validations: {
-    title: { required },
-    limit: { minValue: minValue(100) }
+    name: { required },
+    last_name: { required }
   },
   mounted() {
     M.updateTextFields()
@@ -66,11 +68,11 @@ export default {
       }
       try {
         const category = await this.$store.dispatch('createCategory', {
-          title: this.title,
-          limit: this.limit
+          name: this.name,
+          last_name: this.last_name
         })
-        this.title = ''
-        this.limit = 100
+        this.name = ''
+        this.last_name = ''
         this.$v.$reset()
         this.$message(localizeFilter('Category_HasBeenCreated'))
         this.$emit('created', category)

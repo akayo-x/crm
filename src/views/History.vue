@@ -50,11 +50,10 @@ export default {
   async mounted() {
     this.records = await this.$store.dispatch('fetchRecords')
     const categoires = await this.$store.dispatch('fetchCategories')
-
     this.setupPagination(this.records.map(record => {
       return {
         ...record,
-        categoryName: categoires.find(c => c.id === record.categoryId).title,
+        categoryName: categoires.find(c => c.id === record.categoryId).name,
         typeClass: record.type === 'income' ? 'green' : 'red',
         typeText: record.type === 'income' ? 'Доход' : 'Расход',
       }

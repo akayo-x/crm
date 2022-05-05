@@ -49,8 +49,8 @@ export default {
     },
     updateCategories(category) {
       const idx = this.categories.findIndex(c => c.id === category.id)
-      this.categories[idx].title = category.title
-      this.categories[idx].limit = category.limit
+      this.categories[idx].title = category.name
+      this.categories[idx].limit = category.last_name
       this.updateCount++
     }
   }

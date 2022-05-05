@@ -8,7 +8,7 @@
       <form @submit.prevent="submitHandler">
         <div class="input-field">
           <select ref="select" v-model="current">
-            <option v-for="c of categories" :key="c.id" :value="c.id">{{c.title}}</option>
+            <option v-for="c of categories" :key="c.id" :value="c.id">{{c.last_name +  c.name}}</option>
           </select>
           <label>{{'SelectCategory'|localize}}</label>
         </div>
